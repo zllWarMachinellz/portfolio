@@ -1,0 +1,129 @@
+---
+import { navbarItems } from "@data/navbar/navbar-items";
+import Logo from "@components/navbar/Logo.astro";
+import Items from "./Items.astro";
+import "@styles/fonts/fonts.css";
+import IconMoon from "@components/ui/icons/IconMoon.astro";
+import IconSun from "@components/ui/icons/iconSun.astro";
+---
+
+<nav class="navbar">
+    <div class="logo-container">
+        <Logo width="48" height="48" />
+        <span class="name">DAVID TORRES</span>
+        <span class="proffession">Desarrollador de software</span>
+    </div>
+    <div class="navbar-items">
+        <ul>
+            {
+                navbarItems.map((item) => (
+                    <Items key={item.id} title={item.title} link={item.link} />
+                ))
+            }
+        </ul>
+    </div>
+    <div class="temas">
+        <div class="theme-container">
+            <div>
+                <IconSun />
+            </div>
+            <div>
+                <IconMoon />
+            </div>
+            <div id="icon"></div>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const icono = document.querySelector("#icon");
+    const themeContainer = document.querySelector(".theme-container");
+
+    themeContainer?.addEventListener("click", () => {
+        icono?.classList.toggle("animado");
+        document.documentElement.classList.toggle("dark-mode");
+    });
+</script>
+
+<style>
+    .navbar {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 5px;
+        background: radial-gradient(
+            ellipse 200% 30% at bottom,
+             white,
+            var(--color-bg) 10%
+        );
+    }
+
+    .name {
+        font-family: "Oswald", Courer;
+    }
+
+    .proffession {
+        font-size: 7.5px;
+    }
+
+    .logo-container {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .navbar-items > ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        list-style: none;
+        text-decoration: none;
+        padding: 0;
+    }
+
+    .theme-container {
+        width: 70px;
+        height: 30px;
+        background: rgb(226, 226, 227);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px;
+        border-radius: 20px;
+        border: 1px solid black;
+        position: relative;
+        z-index: 0;
+    }
+
+    .theme-container > div {
+        z-index: 1;
+    }
+
+    #icon {
+        background: white;
+        border-radius: 100%;
+        padding: 2px;
+        box-shadow: 1px 1px gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.5s ease;
+        position: absolute;
+        width: 27px;
+        height: 27px;
+        z-index: -1;
+        left: 2px;
+    }
+
+    .animado {
+        transform: translateX(43px);
+    }
+
+    @media (max-width: 768px) {
+        .navbar-items{
+            display: none;
+        }
+    }
+</style>

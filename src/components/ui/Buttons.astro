@@ -1,0 +1,72 @@
+---
+import type { IButtons } from "@interfaces/button.interface";
+
+const { title, href, icon } = Astro.props as IButtons;
+import "@styles/fonts/fonts.css";
+---
+
+<a id="social-link" href={href}>
+    <div class="container-buttons">
+        <img src={icon} alt={`icono ${title}`} />
+        <span>{title}</span>
+    </div>
+</a>
+
+<style>
+    #social-link {
+        position: relative;
+        text-decoration: none;
+    }
+    .container-buttons {
+        background: aliceblue;
+        z-index: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 6px;
+        border-radius: 50px;
+        width: 120px;
+        gap: 4px;
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+
+    span {
+        font-family: "Oswald";
+        color: black;
+    }
+
+    @keyframes pulse-blur {
+        0%,
+        100% {
+            opacity: 0.6;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(0.6);
+        }
+    }
+
+    #social-link::before {
+        content: "";
+        position: absolute;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        border-radius: 50px;
+        background: linear-gradient(red, orange 50%, yellow 85%, green);
+        z-index: -1;
+        top: -2px;
+        left: -2px;
+        filter: blur(8px);
+        opacity: 0;
+    }
+
+    #social-link:hover::before {
+        opacity: 1;
+        animation: pulse-blur 3s infinite;
+    }
+</style>

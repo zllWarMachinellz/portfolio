@@ -1,0 +1,79 @@
+---
+import ThreeJsModel from "@/react/components/ThreeJsModel";
+import Buttons from "@components/ui/Buttons.astro";
+import { ButtonsHero } from "@data/buttons/buttons";
+import "@styles/fonts/fonts.css";
+---
+
+<section id="hero">
+    <div class="title-container">
+        <h2>
+            <span>Desarrollador</span><span>Fullstack</span><span
+                style="color: blue;">Junior</span
+            >
+        </h2>
+        <div class="btn-social">
+            {ButtonsHero.map((button) => <Buttons {...button} />)}
+        </div>
+    </div>
+    <div>
+        <ThreeJsModel client:only />
+    </div>
+</section>
+
+<style>
+    #hero {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 600px;
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+
+    h2 {
+        font-family: "Roboto";
+        font-weight: 800;
+        /* font-size: 80px; */
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        font-size: clamp(5rem, 7vw + 0.5rem, 6.5rem);
+    }
+
+    .btn-social {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #social-link {
+        text-decoration: none;
+        border: 1px solid blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border-radius: 100px;
+        padding: 5px;
+    }
+
+    @media (max-width: 768px) {
+        h2 {
+            font-size: 1.5rem;
+        }
+        .title-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        canvas{
+            width: 200px;
+            height: 200px;
+        }
+    }
+</style>
